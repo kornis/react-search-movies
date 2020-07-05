@@ -8,8 +8,9 @@ static propTypes = {
 }
     render()
     {
-        const {title, year, poster} = this.props
+        const {id,title, year, poster} = this.props
         return(
+            <a href={`?id=${id}`}>
             <div className="card">
                 <div className="card-header">
                     <img src={poster} alt={title} />
@@ -19,6 +20,7 @@ static propTypes = {
                     <p>{year}</p>
                 </div>
             </div>
+            </a>
         );
     }
 }

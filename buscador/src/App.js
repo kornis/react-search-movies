@@ -3,6 +3,7 @@ import './css/bootstrap.min.css';
 import {Title} from './components/title';
 import {SearchForm} from './components/searchForm';
 import {MovieList} from './components/movieList';
+import {Detail} from './pages/detail';
 
 class App extends Component {
   state = 
@@ -23,6 +24,12 @@ class App extends Component {
 
 
 render(){
+  const url = new URL(document.location);
+  const hasId = url.searchParams.has('id');
+  if(hasId)
+  {
+    return <Detail id={url.searchParams.get('id')}></Detail>
+  }
   return (
     <div className="container">
        <Title>Buscador de películas</Title>

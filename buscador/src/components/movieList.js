@@ -9,6 +9,7 @@ export class MovieList extends Component {
                 {
                     return <Movie
                                 key={movie.imdbID}
+                                id={movie.imdbID}
                                 poster={movie.Poster}
                                 title={movie.Title}
                                 year = {movie.Year}
