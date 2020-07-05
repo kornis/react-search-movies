@@ -1,49 +1,22 @@
 import React, {Component} from 'react';
 import './css/bootstrap.min.css';
-import {Title} from './components/title';
-import {SearchForm} from './components/searchForm';
-import {MovieList} from './components/movieList';
+import {Switch, Route} from 'react-router-dom';
 import {Detail} from './pages/detail';
+import {Home} from './pages/home';
+import {NotFound} from './pages/not-found';
 
 class App extends Component {
-  state = 
-  {
-    results :[],
-    searchUsed: false,
-  }
-
-  _handleResults = (results) =>
-  { 
-    this.setState({results, searchUsed:true});
-  }
-  _renderResults() {
-    return this.state.results.length === 0
-    ? <p>Movie not found!</p>
-    : <MovieList results={this.state.results}></MovieList>
-  }
-
-
 render(){
-  const url = new URL(document.location);
-  const hasId = url.searchParams.has('id');
-  if(hasId)
-  {
-    return <Detail id={url.searchParams.get('id')}></Detail>
-  }
+
   return (
     <div className="container">
-       <Title>Buscador de películas</Title>
-        <SearchForm onResults={this._handleResults}></SearchForm>
-        <div className="row">
-          <div className="col">
-            {this.state.searchUsed 
-              ? this._renderResults()
-              : <small>Use the form to search a movie...</small> 
-              }
-          </div>
-        </div>
-    </div>
-  );
+      <Switch>
+        <Route exact path='/' component={Home}></Route>
+        <Route path='/detail/:id' component={Detail}></Route>
+        <Route component={NotFound}></Route>
+      </Switch>
+      </div>
+    )
   }
 }
 

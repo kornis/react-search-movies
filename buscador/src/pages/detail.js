@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
 import {Movie} from '../components/movie';
+import PropTypes from 'prop-types';
+import {ButtonBackToHome} from '../components/ButtonBackToHome';
 const _API_KEY = "f441bd5c";
 export class Detail extends Component {
+    static propTypes = {
+        match: PropTypes.shape({
+            params: PropTypes.object,
+            isExact: PropTypes.bool,
+            path: PropTypes.string,
+            url: PropTypes.string,
+        })
+    }
 
     state = {
         movie: {}
@@ -18,14 +28,11 @@ export class Detail extends Component {
             });
     }
 
-    _goBack()
-    {
-        window.history.back();
-    }
 
     componentDidMount()
     {
-        const {id} = this.props;
+        console.log(this.props)
+        const {id} = this.props.match.params;
         this._fetchMovie(id);
         console.log('did mount')
     }
@@ -36,7 +43,7 @@ export class Detail extends Component {
         console.log("render")
         return(
             <div>
-            <button onClick={this._goBack}>Volver</button>
+            <ButtonBackToHome />
             <Movie
             id={imdbID}
             title={Title}
